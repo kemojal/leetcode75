@@ -277,19 +277,31 @@ At point 4, the gain is 0, so the new altitude is 1 + 0 = 1.
 At point 5, the gain is -7, so the new altitude is 1 + (-7) = -6.
  */
 
-function largestAltitude(gain: number[]): number {
-  let altitude = 0;
-  let maxAltitude = 0;
+// function largestAltitude(gain: number[]): number {
+//   let altitude = 0;
+//   let maxAltitude = 0;
 
-  for (let point = 0; point < gain.length; point++) {
-    altitude += gain[point];
-    maxAltitude = Math.max(maxAltitude, altitude);
-  }
+//   for (let point = 0; point < gain.length; point++) {
+//     altitude += gain[point];
+//     maxAltitude = Math.max(maxAltitude, altitude);
+//   }
 
-  return maxAltitude;
-}
+//   return maxAltitude;
+// }
 
-// let gain = [-5, 1, 5, 0, -7];
-let gain = [-4, -3, -2, -1, 4, 3, 2];
+// // let gain = [-5, 1, 5, 0, -7];
+// let gain = [-4, -3, -2, -1, 4, 3, 2];
 
-console.log("largestAltitude = " + largestAltitude(gain));
+// console.log("largestAltitude = " + largestAltitude(gain));
+
+
+
+
+function canPlaceFlowers(flowerbed: number[], n: number): boolean {
+    
+};
+
+
+let flowerbed = [1,0,0,0,1],n = 1;
+
+console.log(canPlaceFlowers(flowerbed, n));
