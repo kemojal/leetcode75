@@ -279,15 +279,14 @@ At point 5, the gain is -7, so the new altitude is 1 + (-7) = -6.
 
 function largestAltitude(gain: number[]): number {
   let altitude = 0;
-  let altitudes = [];
+  let maxAltitude = 0;
+
   for (let point = 0; point < gain.length; point++) {
     altitude += gain[point];
-    altitudes.push(altitude);
+    maxAltitude = Math.max(maxAltitude, altitude);
   }
 
-  let maxAltitude = Math.max(...altitudes);
-
-  return maxAltitude > 0 ? maxAltitude : 0;
+  return maxAltitude;
 }
 
 // let gain = [-5, 1, 5, 0, -7];
