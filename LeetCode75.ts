@@ -294,14 +294,70 @@ At point 5, the gain is -7, so the new altitude is 1 + (-7) = -6.
 
 // console.log("largestAltitude = " + largestAltitude(gain));
 
+/**
+ * 
+ *The problem asks us to determine if we can plant n new flowers in the given flowerbed array without violating the rule that no two flowers can be adjacent.
+Example 1: flowerbed = [1, 0, 0, 0, 1], n = 1
+In this example, we have a flowerbed with two plots already occupied (1) and three empty plots (0). We need to check if we can plant one more flower (n = 1) without violating the no-adjacent-flowers rule.
+Copy codeFlowerbed: [1, 0, 0, 0, 1]
+             ^     ^
+We can see that there are two empty plots (0) between the occupied plots (1). Since we need to plant only one flower (n = 1), we can safely plant it in the middle empty plot without violating the rule.
+Copy codeFlowerbed: [1, 0, 1, 0, 1]
+Therefore, the output is true.
+Example 2: flowerbed = [1, 0, 0, 0, 1], n = 2
+In this example, we have the same flowerbed as before, but we need to plant two flowers (n = 2).
+Copy codeFlowerbed: [1, 0, 0, 0, 1]
+             ^     ^
+As we can see, there is only one empty plot (0) between the occupied plots (1). If we plant two flowers in the empty plots, they will be adjacent, violating the no-adjacent-flowers rule.
+Copy codeFlowerbed: [1, 1, 0, 1, 1] (Invalid)
+Therefore, the output is false.
+The solution to this problem involves iterating through the flowerbed array and checking for empty plots (0) where we can plant new flowers. We need to consider the cases where the plot is at the beginning or end of the flowerbed, as well as the cases where the plot is in the middle.
+Here's a step-by-step illustration of the solution:
 
+Initialize a variable count to 0 to keep track of the number of flowers that can be planted.
+Iterate through the flowerbed array:
+a. If the current plot is empty (0) and the previous and next plots are also empty (or at the beginning/end of the flowerbed), we can plant a flower in the current plot. Increment count and mark the current and adjacent plots as occupied (1).
+b. If the current plot is occupied (1), skip to the next plot.
+After iterating through the entire flowerbed, compare the value of count with n. If count is greater than or equal to n, return true, otherwise, return false.
 
+By following this approach, we can determine if it is possible to plant n new flowers in the given flowerbed without violating the no-adjacent-flowers rule.
+ */
 
 function canPlaceFlowers(flowerbed: number[], n: number): boolean {
-    
-};
+  let emptyPlots = 0;
+  const length = flowerbed.length;
+  for (let i = 0; i < flowerbed.length; i++) {
+    let currentBed = flowerbed[i];
 
 
-let flowerbed = [1,0,0,0,1],n = 1;
 
+    if (currentBed == 0) {
+      const emptyPrevPlot = (i === 0) || (flowerbed[i - 1] === 0);
+      const emptyNextPlot = (i === length - 1) || (flowerbed[i + 1] === 0);
+
+      if (emptyPrevPlot && emptyNextPlot) {
+        flowerbed[i] = 1;
+        emptyPlots++;
+      }
+      
+    } 
+      
+  }
+
+  return emptyPlots === n;
+}
+
+// let flowerbed = [1, 0, 0, 0, 1],
+//   n = 1;
+// let flowerbed = [1,0,0,0,1], n = 2;
+
+// let flowerbed = [1, 0, 0, 0, 0, 1],
+//   n = 2;
+
+
+// let flowerbed = [0, 0, 1],
+//   n = 1;
+
+let flowerbed = [1,0, 0, 0, 1],
+  n = 1;
 console.log(canPlaceFlowers(flowerbed, n));
