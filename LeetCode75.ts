@@ -329,8 +329,6 @@ By following this approach, we can determine if it is possible to plant n new fl
 //   for (let i = 0; i < flowerbed.length; i++) {
 //     let currentBed = flowerbed[i];
 
-
-
 //     if (currentBed == 0) {
 //       const emptyPrevPlot = (i === 0) || (flowerbed[i - 1] === 0);
 //       const emptyNextPlot = (i === length - 1) || (flowerbed[i + 1] === 0);
@@ -339,9 +337,9 @@ By following this approach, we can determine if it is possible to plant n new fl
 //         flowerbed[i] = 1;
 //         emptyPlots++;
 //       }
-      
-//     } 
-      
+
+//     }
+
 //   }
 
 //   return emptyPlots === n;
@@ -354,17 +352,12 @@ By following this approach, we can determine if it is possible to plant n new fl
 // // let flowerbed = [1, 0, 0, 0, 0, 1],
 // //   n = 2;
 
-
 // // let flowerbed = [0, 0, 1],
 // //   n = 1;
 
 // let flowerbed = [1,0, 0, 0, 1],
 //   n = 1;
 // console.log(canPlaceFlowers(flowerbed, n));
-
-
-
-
 
 /**
  * Question 443. String Compression
@@ -405,46 +398,90 @@ Constraints:
 chars[i] is a lowercase English letter, uppercase English letter, digit, or symbol.
  */
 
+// function compress(chars: string[]): number {
+//   let write = 0; // Pointer to write compressed characters
+//   let read = 0; // Pointer to read characters from the input array
 
-function compress(chars: string[]): number {
-  let write = 0; // Pointer to write compressed characters
-  let read = 0; // Pointer to read characters from the input array
+//   while (read < chars.length) {
+//       let char = chars[read]; // Store the current character
+//       let count = 1; // Count of consecutive repeating characters
 
-  while (read < chars.length) {
-      let char = chars[read]; // Store the current character
-      let count = 1; // Count of consecutive repeating characters
+//       // Count the length of the group of consecutive repeating characters
+//       while (read + 1 < chars.length && chars[read + 1] === char) {
+//           count++;
+//           read++;
+//       }
 
-      // Count the length of the group of consecutive repeating characters
-      while (read + 1 < chars.length && chars[read + 1] === char) {
-          count++;
-          read++;
-      }
+//       // console.log("count: " + count, "read: " + read);
 
-      // console.log("count: " + count, "read: " + read);
+//       // Write the compressed character(s) to the input array
+//       chars[write] = char;
+//       write++;
 
-      // Write the compressed character(s) to the input array
-      chars[write] = char;
-      write++;
+//       // console.log("chars: ", chars);
 
+//       // If the count is greater than 1, write the count
+//       if (count > 1) {
+//           const countStr = count.toString();
+//           for (let i = 0; i < countStr.length; i++) {
+//               chars[write] = countStr[i];
+//               write++;
+//           }
+//       }
 
-      // console.log("chars: ", chars);
+//       read++; // Move the read pointer to the next character
+//   }
 
-      // If the count is greater than 1, write the count
-      if (count > 1) {
-          const countStr = count.toString();
-          for (let i = 0; i < countStr.length; i++) {
-              chars[write] = countStr[i];
-              write++;
-          }
-      }
+//   return write;
+// }
 
-      read++; // Move the read pointer to the next character
+// let chars = ["a","a","b","b","c","c","c"];
+
+// console.log(compress(chars));
+
+/**
+ * Q392. Is Subsequence
+ * 
+ * Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+ 
+
+Example 1:
+
+Input: s = "abc", t = "ahbgdc"
+Output: true
+Example 2:
+
+Input: s = "axc", t = "ahbgdc"
+Output: false
+ 
+
+Constraints:
+
+0 <= s.length <= 100
+0 <= t.length <= 104
+s and t consist only of lowercase English letters.
+ 
+
+Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 109, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?
+ */
+
+function isSubsequence(s: string, t: string): boolean {
+  let sPointer = 0;
+  let tPointer = 0;
+  while (sPointer < s.length && tPointer < t.length) {
+    if (s[sPointer] === t[tPointer]) {
+      sPointer++;
+    }
+    tPointer++;
   }
 
-  return write;
+  return sPointer === s.length;
 }
 
+let s = "abc",
+  t = "ahbgdc";
 
-let chars = ["a","a","b","b","c","c","c"];
-
-console.log(compress(chars));
+console.log("isSubsequence: " + isSubsequence(s, t));
